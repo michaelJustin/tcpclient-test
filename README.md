@@ -7,7 +7,9 @@ Test applications for Delphi and Free Pascal TCP clients
 
 The Indy 10 client implementation is complete and included in unit clientmainindy10
 
+## Ararat Synapse Client
 
+The Ararat Synapse client implementation is complete and included in unit clientsynapse266
 
 # Resources
 ## TCP Client Libraries Code
