@@ -34,6 +34,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="ClientMainIndy10"/>
       </Unit>
+      <Unit>
+        <Filename Value="clientsynapse266.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ClientSynapse266"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -44,7 +49,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir);..\..\Indy10\Lib\Core"/>
-      <OtherUnitFiles Value="..\..\Indy10\Lib\Core;..\..\Indy10\Lib\Protocols;..\..\Indy10\Lib\System"/>
+      <OtherUnitFiles Value="..\..\Indy10\Lib\Core;..\..\Indy10\Lib\Protocols;..\..\Indy10\Lib\System;..\..\synalist-code-r266"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Parsing>
@@ -74,6 +79,9 @@
       </Item>
       <Item>
         <Name Value="EIdConnClosedGracefully"/>
+      </Item>
+      <Item>
+        <Name Value="ESynapseError"/>
       </Item>
     </Exceptions>
   </Debugging>

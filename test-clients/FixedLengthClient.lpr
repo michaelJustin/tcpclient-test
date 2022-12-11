@@ -7,7 +7,8 @@
 program FixedLengthClient;
 
 uses
-  ClientMainIndy10,
+  //ClientMainIndy10,
+  ClientSynapse266,
   SysUtils;
 
 const
@@ -15,14 +16,18 @@ const
   SERVER_HOST = '127.0.0.1';
   SERVER_PORT = 30000;
 
-  procedure Test(AExpectedLength: Integer);
+  procedure Test(ABytesToRead: Integer);
   var
     Response: TBytes;
   begin
     WriteLn(Format('try to read %d bytes from %s:%d',
-      [AExpectedLength, SERVER_HOST, SERVER_PORT]));
-    Response := Read(SERVER_HOST, SERVER_PORT, AExpectedLength);
+      [ABytesToRead, SERVER_HOST, SERVER_PORT]));
+    Response := Read(SERVER_HOST, SERVER_PORT, ABytesToRead);
     WriteLn(Format('received %d bytes', [Length(Response)]));
+    if Length(Response) <> ABytesToRead then
+    begin
+      WriteLn('that''s an error');
+    end;
   end;
 
 begin
