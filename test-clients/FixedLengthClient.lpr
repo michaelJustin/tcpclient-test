@@ -8,7 +8,8 @@ program FixedLengthClient;
 
 uses
   //ClientMainIndy10,
-  ClientSynapse266,
+  //ClientSynapse266,
+  ClientSynopseCrtSock,
   SysUtils;
 
 const
