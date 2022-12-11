@@ -23,7 +23,7 @@ var
   Client: TCrtSocket;
 begin
   SetLength(Result, ALength); // required
-  Client := TCrtSocket.Open(SockString(AHost), SockString(IntToStr(APort)));
+  Client := TCrtSocket.Open(AHost, IntToStr(APort));
   try
     Client.SockRecv(Result, ALength);
   finally
