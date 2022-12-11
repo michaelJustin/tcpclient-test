@@ -11,10 +11,15 @@ The Indy 10 client implementation is complete and included in unit clientmainind
 
 The Ararat Synapse client implementation is complete and included in unit clientsynapse266
 
+## Synopse SynCrtSock Client
+
+The Synopse SynCrtSock client implementation is complete and included in unit clientsynopsecrtsock
+
 # Resources
 ## TCP Client Libraries Code
 
 * Indy Sockets - https://github.com/IndySockets/Indy
 * Ararat Synapse - https://sourceforge.net/p/synalist/code/HEAD/tree/trunk/
+* Synopse - https://synopse.info
 
 
