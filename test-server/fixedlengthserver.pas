@@ -31,12 +31,13 @@ type
 
 function TFixedLengthServer.DoExecute(AContext: TIdContext): boolean;
 var
-  Buffer: TIdBytes;
+  Buffer: TBytes;
 begin
   Result := inherited;
-  Buffer := ToBytes(StringOfChar('A', CONTENT_LENGTH));
-  AContext.Connection.IOHandler.WriteDirect(Buffer, CONTENT_LENGTH);
-  AContext.Connection.Disconnect;
+  SetLength(Buffer, CONTENT_LENGTH);
+  WriteLn(Format('write %d bytes', [Length(Buffer)]));
+  AContext.Connection.IOHandler.Write(Buffer, CONTENT_LENGTH);
+  AContext.Connection.IOHandler.CloseGracefully;
 end;
 
 procedure Run;
