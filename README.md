@@ -15,6 +15,20 @@ The Ararat Synapse client implementation is complete and included in unit client
 
 The Synopse SynCrtSock client implementation is complete and included in unit clientsynopsecrtsock
 
+# Part 2: read from the connection until an arbitrary terminator 
+
+## Indy 10 Client
+
+The Indy 10 client implementation is complete and included in unit clientmainindy10
+
+## Ararat Synapse Client
+
+The Ararat Synapse client implementation is complete and included in unit clientsynapse266
+
+## Synopse SynCrtSock Client
+
+The Synopse SynCrtSock client implementation is complete and included in unit clientsynopsecrtsock
+
 # Resources
 ## TCP Client Libraries Code
 
