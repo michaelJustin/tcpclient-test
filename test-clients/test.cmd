@@ -1,3 +1,5 @@
-FixedLengthClient
+:FixedLengthClient
+
+FixedDelimiterClient
 
 pause

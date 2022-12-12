@@ -13,6 +13,8 @@ uses
 
 function Read(AHost: string; APort: Integer; ALength: Integer): TBytes;
 
+function ReadDelimited(AHost: string; APort: Integer; ADelimiter: RawByteString): string;
+
 implementation
 
 uses
@@ -26,6 +28,39 @@ begin
   Client := TCrtSocket.Open(AHost, IntToStr(APort));
   try
     Client.SockRecv(Result, ALength);
+  finally
+    Client.Free;
+  end;
+end;
+
+function ReadDelimited(AHost: string; APort: Integer; ADelimiter: RawByteString): string;
+var
+  Client: TCrtSocket;
+  B: byte;
+  L: PtrInt;
+  Pos: Integer;
+begin
+  Result := '';
+  Pos := 1;
+
+  Client := TCrtSocket.Open(AHost, IntToStr(APort));
+  try
+    repeat
+      Client.SockRecv(@B,1); // this is slow but works
+      if B = Ord(ADelimiter[Pos]) then
+      begin
+        Inc(Pos);
+        if Pos = Length(ADelimiter) then
+        begin
+          Break;
+        end;
+      end else begin
+        L := Length(Result);
+        SetLength(Result, L+1);
+        PByteArray(Result)[L] := B;
+        Pos := 1;
+      end;
+    until False;
   finally
     Client.Free;
   end;

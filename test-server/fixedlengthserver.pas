@@ -34,6 +34,7 @@ var
   Buffer: TBytes;
 begin
   Result := inherited;
+
   SetLength(Buffer, CONTENT_LENGTH);
   WriteLn(Format('write %d bytes', [Length(Buffer)]));
   AContext.Connection.IOHandler.Write(Buffer, CONTENT_LENGTH);
@@ -45,14 +46,18 @@ var
   ExampleServer: TIdCustomTCPServer;
 begin
   ExampleServer := TFixedLengthServer.Create;
-  ExampleServer.DefaultPort := SERVER_PORT;
-  ExampleServer.Active := True;
+  try
+    ExampleServer.DefaultPort := SERVER_PORT;
+    ExampleServer.Active := True;
 
-  WriteLn(Format('server is listening on port %d', [30000]));
-  WriteLn('hit any key to stop');
-  ReadLn;
+    WriteLn(Format('server is listening on port %d', [30000]));
+    WriteLn('hit any key to stop');
+    ReadLn;
 
-  ExampleServer.Active := False;
+    ExampleServer.Active := False;
+  finally
+    ExampleServer.Free;
+  end;
 end;
 
 end.

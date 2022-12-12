@@ -13,6 +13,8 @@ uses
 
 function Read(AHost: string; APort: Integer; ALength: Integer): TBytes;
 
+function ReadDelimited(AHost: string; APort: Integer; ADelimiter: RawByteString): string;
+
 implementation
 
 uses
@@ -30,6 +32,20 @@ begin
     // note:
     // FSock.RecvBuffer(Result, ALength); seems to return "any" invalid length
     FSock.RecvBufferEx(Result, ALength, 1000);
+   finally
+     FSock.Free;
+   end;
+end;
+
+function ReadDelimited(AHost: string; APort: Integer; ADelimiter: RawByteString): string;
+var
+  FSock: TTCPBlockSocket;
+begin
+  FSock := TTCPBlockSocket.Create;
+  try
+    FSock.RaiseExcept := True;
+    FSock.Connect(AHost, IntToStr(APort));
+    Result := FSock.RecvTerminated(1000, ADelimiter);
    finally
      FSock.Free;
    end;
