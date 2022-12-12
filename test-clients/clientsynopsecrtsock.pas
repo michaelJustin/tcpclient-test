@@ -13,7 +13,7 @@ uses
 
 function Read(AHost: string; APort: Integer; ALength: Integer): TBytes;
 
-function ReadDelimited(AHost: string; APort: Integer; ADelimiter: RawByteString): string;
+function ReadDelimited(AHost: string; APort: Integer; ATerminator: RawByteString): string;
 
 implementation
 
@@ -33,7 +33,7 @@ begin
   end;
 end;
 
-function ReadDelimited(AHost: string; APort: Integer; ADelimiter: RawByteString): string;
+function ReadDelimited(AHost: string; APort: Integer; ATerminator: RawByteString): string;
 var
   Client: TCrtSocket;
   B: byte;
@@ -47,10 +47,10 @@ begin
   try
     repeat
       Client.SockRecv(@B,1); // this is slow but works
-      if B = Ord(ADelimiter[Pos]) then
+      if B = Ord(ATerminator[Pos]) then
       begin
         Inc(Pos);
-        if Pos = Length(ADelimiter) then
+        if Pos = Length(ATerminator) then
         begin
           Break;
         end;

@@ -4,7 +4,7 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 *)
 
-unit ClientSynapse266;
+unit ClientIndySockets10;
 
 interface
 
@@ -18,36 +18,36 @@ function ReadDelimited(AHost: string; APort: Integer; ATerminator: RawByteString
 implementation
 
 uses
-  blcksock, Classes;
+  IdTcpClient, IdGlobal, Classes;
 
 function Read(AHost: string; APort: Integer; ALength: Integer): TBytes;
 var
-  FSock: TTCPBlockSocket;
+   Client: TIdTCPClient;
 begin
-  SetLength(Result, ALength);
-  FSock := TTCPBlockSocket.Create;
-  try
-    FSock.RaiseExcept := True;
-    FSock.Connect(AHost, IntToStr(APort));
-    // note:
-    // FSock.RecvBuffer(Result, ALength); seems to return "any" invalid length
-    FSock.RecvBufferEx(Result, ALength, 1000);
+   SetLength(Result, ALength);
+   Client := TIdTCPClient.Create;
+   try
+     Client.Host := AHost;
+     Client.Port := APort;
+     Client.Connect;
+     Client.IOHandler.ReadBytes(Result, Length(Result), False);
    finally
-     FSock.Free;
+     Client.Free;
    end;
 end;
 
 function ReadDelimited(AHost: string; APort: Integer; ATerminator: RawByteString): string;
 var
-  FSock: TTCPBlockSocket;
+   Client: TIdTCPClient;
 begin
-  FSock := TTCPBlockSocket.Create;
-  try
-    FSock.RaiseExcept := True;
-    FSock.Connect(AHost, IntToStr(APort));
-    Result := FSock.RecvTerminated(1000, ATerminator);
+   Client := TIdTCPClient.Create;
+   try
+     Client.Host := AHost;
+     Client.Port := APort;
+     Client.Connect;
+     Result := Client.IOHandler.ReadLn(ATerminator, IndyTextEncoding_UTF8);
    finally
-     FSock.Free;
+     Client.Free;
    end;
 end;
 
