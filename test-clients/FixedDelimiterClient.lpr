@@ -8,22 +8,22 @@ program FixedDelimiterClient;
 
 uses
   ClientIndySockets10,
-  ClientSynapse266,
-  ClientSynopseCrtSock,
+  //ClientSynapse266,
+  //ClientSynopseCrtSock,
   SysUtils;
 
 const
-  FIXED_DELIMITER = 'abc';
+  FIXED_DELIMITER = '' + #$2603;  // '☃';
   SERVER_HOST = '127.0.0.1';
   SERVER_PORT = 30000;
 
-  procedure Test(ADelimiter: RawByteString);
+  procedure Test(ADelimiter: string);
   var
     Response: string;
   begin
     WriteLn(Format('try to read from %s:%d delimited with %s',
       [SERVER_HOST, SERVER_PORT, ADelimiter]));
-    Response := ReadDelimited(SERVER_HOST, SERVER_PORT, ADelimiter);
+    Response := ReadDelimited(SERVER_HOST, SERVER_PORT, Utf8Encode(ADelimiter));
     WriteLn(Format('received response "%s" - %d bytes',
       [Response, Length(Response)]));
   end;

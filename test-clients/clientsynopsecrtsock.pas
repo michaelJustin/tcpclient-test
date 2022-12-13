@@ -46,17 +46,17 @@ begin
   Client := TCrtSocket.Open(AHost, IntToStr(APort));
   try
     repeat
-      Client.SockRecv(@B,1); // this is slow but works
+      Client.SockRecv(@B, 1); // this is slow but works
       if B = Ord(ATerminator[Pos]) then
       begin
-        Inc(Pos);
         if Pos = Length(ATerminator) then
         begin
           Break;
         end;
+        Inc(Pos);
       end else begin
         L := Length(Result);
-        SetLength(Result, L+1);
+        SetLength(Result, L + 1);
         PByteArray(Result)[L] := B;
         Pos := 1;
       end;

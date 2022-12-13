@@ -10,7 +10,7 @@ interface
 
 const
   SERVER_PORT = 30000;
-  FIXED_DELIMITER = 'abc';
+  FIXED_DELIMITER = '☃';
 
 procedure Run;
 
@@ -41,7 +41,7 @@ begin
   AContext.Connection.IOHandler.Write(RESPONSE);
 
   WriteLn(Format('write delimiter "%s"', [FIXED_DELIMITER]));
-  AContext.Connection.IOHandler.Write(FIXED_DELIMITER);
+  AContext.Connection.IOHandler.Write(Utf8Encode(FIXED_DELIMITER));
 
   WriteLn(Format('write text beyond delimiter "%s"', [RESPONSE_PART_2]));
   AContext.Connection.IOHandler.Write(RESPONSE_PART_2);
