@@ -10,8 +10,8 @@ interface
 
 const
   SERVER_PORT = 30000;
-  RESPONSE = 'season''s ❄❄❄ greetings';
-  // RESPONSE = 'season''s greetings';
+  RESPONSE = '❄❄❄';  // ❄ UTF-8 encoded is 0xE2 0x9D 0x84
+  // RESPONSE = 'season''s ❄❄❄ greetings';
   FIXED_DELIMITER = '☃';
   RESPONSE_PART_2 = 'The client must not receive this.';
 
