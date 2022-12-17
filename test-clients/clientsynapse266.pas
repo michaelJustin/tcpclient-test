@@ -13,7 +13,7 @@ uses
 
 function Read(AHost: string; APort: Integer; ALength: Integer): TBytes;
 
-function ReadDelimited(AHost: string; APort: Integer; ATerminator: RawByteString): string;
+function ReadDelimited(AHost: string; APort: Integer; ATerminator: string): string;
 
 implementation
 
@@ -37,7 +37,7 @@ begin
    end;
 end;
 
-function ReadDelimited(AHost: string; APort: Integer; ATerminator: RawByteString): string;
+function ReadDelimited(AHost: string; APort: Integer; ATerminator: string): string;
 var
   FSock: TTCPBlockSocket;
 begin
@@ -45,7 +45,7 @@ begin
   try
     FSock.RaiseExcept := True;
     FSock.Connect(AHost, IntToStr(APort));
-    Result := FSock.RecvTerminated(1000, ATerminator);
+    Result := Utf8Decode(FSock.RecvTerminated(1000, Utf8Encode(ATerminator)));
    finally
      FSock.Free;
    end;

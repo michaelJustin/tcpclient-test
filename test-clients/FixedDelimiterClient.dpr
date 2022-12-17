@@ -7,8 +7,8 @@
 program FixedDelimiterClient;
 
 uses
-  ClientIndySockets10,
-  //ClientSynapse266,
+//  ClientIndySockets10,
+  ClientSynapse266,
   //ClientSynopseCrtSock,
   SysUtils;
 
