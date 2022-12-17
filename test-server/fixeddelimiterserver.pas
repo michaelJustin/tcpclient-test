@@ -1,4 +1,4 @@
-(*
+﻿(*
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -10,7 +10,10 @@ interface
 
 const
   SERVER_PORT = 30000;
+  // RESPONSE = 'season''s ❄❄❄ greetings';
+  RESPONSE = 'season''s greetings';
   FIXED_DELIMITER = '☃';
+  RESPONSE_PART_2 = 'The client must not receive this.';
 
 procedure Run;
 
@@ -18,10 +21,6 @@ implementation
 
 uses
   IdCustomTCPServer, IdContext, IdGlobal, SysUtils, Classes;
-
-const
-  RESPONSE = 'This is the server response.';
-  RESPONSE_PART_2 = 'The client must not receive this.';
 
 type
   { TFixedDelimiterServer }
@@ -37,11 +36,13 @@ function TFixedDelimiterServer.DoExecute(AContext: TIdContext): boolean;
 begin
   Result := inherited;
 
+  AContext.Connection.IOHandler.DefStringEncoding := IndyTextEncoding_UTF8;
+
   WriteLn(Format('write response "%s"', [RESPONSE]));
   AContext.Connection.IOHandler.Write(RESPONSE);
 
   WriteLn(Format('write delimiter "%s"', [FIXED_DELIMITER]));
-  AContext.Connection.IOHandler.Write(Utf8Encode(FIXED_DELIMITER));
+  AContext.Connection.IOHandler.Write(FIXED_DELIMITER);
 
   WriteLn(Format('write text beyond delimiter "%s"', [RESPONSE_PART_2]));
   AContext.Connection.IOHandler.Write(RESPONSE_PART_2);
@@ -59,6 +60,7 @@ begin
     ExampleServer.Active := True;
 
     WriteLn(Format('server is listening on port %d', [30000]));
+    WriteLn(Format('message: %s delimiter: %s', [RESPONSE, FIXED_DELIMITER]));
     WriteLn('hit any key to stop');
     ReadLn;
 

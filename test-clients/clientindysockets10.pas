@@ -13,7 +13,7 @@ uses
 
 function Read(AHost: string; APort: Integer; ALength: Integer): TBytes;
 
-function ReadDelimited(AHost: string; APort: Integer; ATerminator: RawByteString): string;
+function ReadDelimited(AHost: string; APort: Integer; ATerminator: string): string;
 
 implementation
 
@@ -30,22 +30,28 @@ begin
      Client.Host := AHost;
      Client.Port := APort;
      Client.Connect;
-     Client.IOHandler.ReadBytes(Result, Length(Result), False);
+     Client.IOHandler.ReadBytes(TIdBytes(Result), Length(Result), False);
    finally
      Client.Free;
    end;
 end;
 
-function ReadDelimited(AHost: string; APort: Integer; ATerminator: RawByteString): string;
+function ReadDelimited(AHost: string; APort: Integer; ATerminator: string): string;
 var
    Client: TIdTCPClient;
 begin
+   Result := '';
    Client := TIdTCPClient.Create;
    try
      Client.Host := AHost;
      Client.Port := APort;
      Client.Connect;
-     Result := Client.IOHandler.ReadLn(ATerminator, IndyTextEncoding_UTF8);
+     Client.IOHandler.DefStringEncoding := IndyTextEncoding_UTF8;
+     Client.IOHandler.CheckForDataOnSource(50);
+     if not Client.IOHandler.InputBufferIsEmpty then
+     begin
+       Result := Client.IOHandler.ReadLn(ATerminator);
+     end;
    finally
      Client.Free;
    end;

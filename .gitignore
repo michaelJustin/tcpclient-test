@@ -2,3 +2,7 @@
 *.exe
 backup
 lib
+__history
+*.identcache
+*.dcu
+*.local
