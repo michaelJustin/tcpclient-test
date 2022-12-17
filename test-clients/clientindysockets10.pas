@@ -47,11 +47,7 @@ begin
      Client.Port := APort;
      Client.Connect;
      Client.IOHandler.DefStringEncoding := IndyTextEncoding_UTF8;
-     Client.IOHandler.CheckForDataOnSource(50);
-     if not Client.IOHandler.InputBufferIsEmpty then
-     begin
-       Result := Client.IOHandler.ReadLn(ATerminator);
-     end;
+     Result := Client.IOHandler.ReadLn(ATerminator);
    finally
      Client.Free;
    end;
