@@ -32,9 +32,9 @@ begin
     // note:
     // FSock.RecvBuffer(Result, ALength); seems to return "any" invalid length
     FSock.RecvBufferEx(Result, ALength, 1000);
-   finally
-     FSock.Free;
-   end;
+  finally
+    FSock.Free;
+  end;
 end;
 
 function ReadDelimited(AHost: string; APort: Integer; ATerminator: string): string;

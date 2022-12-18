@@ -7,9 +7,9 @@
 program FixedLengthClient;
 
 uses
-  //ClientMainIndy10,
-  //ClientSynapse266,
-  ClientSynopseCrtSock,
+  ClientIndySockets10,
+//  ClientSynapse266,
+//  ClientSynopseCrtSock,
   SysUtils;
 
 const
