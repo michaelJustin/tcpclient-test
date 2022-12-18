@@ -45,10 +45,10 @@ begin
   try
     FSock.RaiseExcept := True;
     FSock.Connect(AHost, IntToStr(APort));
-    Result := Utf8Decode(FSock.RecvTerminated(1000, Utf8Encode(ATerminator)));
-   finally
-     FSock.Free;
-   end;
+    Result := Utf8ToString(FSock.RecvTerminated(1000, Utf8Encode(ATerminator)));
+  finally
+    FSock.Free;
+  end;
 end;
 
 end.
