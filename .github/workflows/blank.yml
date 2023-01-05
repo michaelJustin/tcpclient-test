@@ -54,7 +54,7 @@ jobs:
           # Full path to fpc executable
           fpc: # optional, default is 
           # Main source file to compile
-          source: 
+          source: test-clients/FixedDelimiterClient.lpi
           # Display user-defined messages
           user-defined: # optional, default is *
           # Verbosity level
