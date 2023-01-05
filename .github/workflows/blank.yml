@@ -35,6 +35,24 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
           
-          - name: Free Pascal Compiler
-  uses: suve/GHActions-FPC@v0.4.0
+      # Runs FPC
+      - name: Free Pascal Compiler
+        uses: suve/GHActions-FPC@v0.4.0
+        with:
+          # List of paths to ignore
+          exclude-path: # optional, default is 
+          # Strictness level
+          fail-on: # optional, default is e
+          # FPC flags (space-separated)
+          flags: # optional, default is 
+          # Full path to fpc executable
+          fpc: # optional, default is 
+          # Main source file to compile
+          source: 
+          # Display user-defined messages
+          user-defined: # optional, default is *
+          # Verbosity level
+          verbosity: # optional, default is ew
+          # Working directory to use
+          workdir: # optional, default is 
 
